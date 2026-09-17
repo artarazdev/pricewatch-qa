@@ -1,0 +1,42 @@
+node_modules/
+dist/
+*.log
+*.tsbuildinfo
+
+# Local agent tooling
+.atl/
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+
+# Coverage and temporary evidence
+/coverage/
+/test-artifacts/
+
+# SQLite (V0.2+)
+*.sqlite
+*.sqlite3
+*.db
+
+# Env / secrets
+.env
+.env.local
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Editor metadata
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+
+# OS
+.DS_Store
+Thumbs.db

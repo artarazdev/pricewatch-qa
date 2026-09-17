@@ -1,0 +1,29 @@
+{
+  "name": "pricewatch-qa",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Modular ecommerce price-monitoring platform built as a QA Automation engineering portfolio project.",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "playwright test tests/unit tests/integration",
+    "test:e2e": "playwright test tests/e2e"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.15.0",
+    "@playwright/test": "^1.62.1",
+    "@types/node": "^22.10.1",
+    "eslint": "^9.15.0",
+    "eslint-config-prettier": "^9.1.0",
+    "prettier": "^3.4.1",
+    "typescript": "^5.7.2",
+    "typescript-eslint": "^8.16.0"
+  }
+}
