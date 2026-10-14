@@ -72,6 +72,20 @@ npm run lint
 npm run typecheck
 ```
 
+### Refreshing selector evidence
+
+Store selectors break when the store changes its DOM. Every selector chain in `src/stores/amazon/selectors.ts` must be backed by a real page capture. To capture one:
+
+```bash
+node scripts/capture-amazon-fixture.ts "https://www.amazon.es/dp/<ASIN>" <scenario-name>
+```
+
+The script runs TypeScript directly, so it needs a Node.js version with native type stripping (Node 23.6 or later; verified on Node 26). Capture while logged out: the sanitizer removes session data from attributes, but not visible text such as an account name or delivery address.
+
+The script opens a visible browser with the `es-ES` locale. Solve any CAPTCHA or cookie banner by hand; the script never bypasses them. Press Enter to capture. The page is sanitized (scripts, styles, and session, CSRF, and token values are removed) and saved to `captures/amazon/`.
+
+Captures are third-party content and stay local: `captures/` is git-ignored. Committed tests never depend on them.
+
 ## Roadmap
 
 | Version | Focus                       |

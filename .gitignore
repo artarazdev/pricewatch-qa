@@ -18,6 +18,12 @@ dist/
 /coverage/
 /test-artifacts/
 
+# Real store captures: third-party content, local evidence only
+/captures/
+
+# Agent memory (personal prompts and local paths; never public)
+.engram/
+
 # SQLite (V0.2+)
 *.sqlite
 *.sqlite3
