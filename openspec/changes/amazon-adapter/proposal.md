@@ -70,7 +70,7 @@ Implement the Amazon Spain Store Adapter following the Store Adapter pattern, pl
 ## Success Criteria
 
 - [ ] `src/stores/amazon/crawler.ts` exports `AmazonCrawler` implementing `StoreCrawler` interface
-- [ ] Parser produces a `Product` object with all 10 fields populated or explicitly `undefined`
+- [ ] Parser produces a `Product` object with all required fields populated; optional `seller` may be absent
 - [ ] Validator rejects invalid data with typed error messages (no silent coercion to defaults)
 - [ ] Unit tests for parser pass against HTML fixture
 - [ ] Validator correctly identifies missing required fields and invalid currency/availability values

@@ -12,7 +12,7 @@ The adapter MUST NOT expose store-internal identifiers or DOM structures outside
 
 - GIVEN a reachable product page URL for a supported store
 - WHEN the `crawl(url)` method is invoked
-- THEN the result SHALL be `CrawlSuccess` with a `Product` object where all required fields are populated or explicitly `undefined`
+- THEN the result SHALL be `CrawlSuccess` with a `Product` object where all required fields are populated
 - AND the `status` field SHALL be `'success'`
 - AND the `product.store` field SHALL match the adapter's store identifier
 

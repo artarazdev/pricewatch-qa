@@ -30,16 +30,22 @@
 ## Phase 2: Amazon Selectors + Config
 
 ### Task 2.1
+- **action:** create test first, then implementation
+- **target:** `tests/unit/amazon-config.test.ts`, `src/stores/amazon/config.ts`
+- **description:** RED: create a deterministic unit test for the Amazon store configuration. GREEN: create `AmazonConfig` and a const object with `baseUrl: 'https://www.amazon.es'`, `timeoutMs: 30_000`, `expectedCurrency: 'EUR'`. No runtime loading.
+- **verify:** The focused RED test fails because the module does not exist; after implementation, the focused test, `npm test`, typecheck, lint, and build pass.
+
+### Task 2.1a
 - **action:** create
-- **target:** `src/stores/amazon/config.ts`
-- **description:** Create Amazon store configuration exporting `AmazonConfig` interface and const object with `baseUrl: 'https://www.amazon.es'`, `timeoutMs: 30_000`, `expectedCurrency: 'EUR'`. No runtime loading.
-- **verify:** File exists, exports `AmazonConfig` and `amazonConfig` const, types match design.
+- **target:** `scripts/capture-amazon-fixture.ts`, `scripts/sanitize-html.ts`, git-ignored `captures/amazon/`
+- **description:** Create a manual, headed Playwright capture script that opens one Amazon ES product URL with locale `es-ES`, waits for the rendered DOM, sanitizes it (removes scripts, styles, iframes, non-canonical links, and session, CSRF, and token values), and saves it under the git-ignored `captures/amazon/` directory. Captures are third-party content and local evidence only; they are never committed and never used as test input. The operator resolves any CAPTCHA by hand; the script never attempts to bypass it. Capture fixtures for distinct layouts and scenarios as evidence for the selector chains. Captured: `product-in-stock` (B078GRMFSN, buy-box accordion with new and used offers, sold by Amazon) and `product-third-party-seller` (B08BZF1FMQ, single offer without accordion, sold by a third party and fulfilled by Amazon).
+- **verify:** Each fixture is the rendered HTML of a real product page, not a CAPTCHA page. Every Task 2.2 selector is checked against the fixtures, and Task 2.2 and the selector-fallback spec are corrected before Task 2.2 RED if the evidence contradicts them.
 
 ### Task 2.2
-- **action:** create
-- **target:** `src/stores/amazon/selectors.ts`
-- **description:** Create selector fallback chains exporting `SelectorChain` and `FieldSelectors` interfaces, and `SELECTORS` record. Chains for: name (primary `#productTitle`, fallback `[data-automation="product-title"]`), price (primary `.a-price .a-offscreen`, fallbacks `#priceblock_ourprice`, `#priceblock_dealprice`), availability, seller, url/externalId. Each chain entry has selector string, attribute ('textContent'|'href'|'src'|'aria-label'), optional transform function.
-- **verify:** File exists, `SELECTORS` record contains all specified fields, primary and fallback chains are defined as specified.
+- **action:** create test first, then implementation
+- **target:** `tests/unit/amazon-selectors.test.ts`, `src/stores/amazon/selectors.ts`
+- **description:** RED: create deterministic tests for the selector contracts and documented fallback order. GREEN: export `SelectorChain`, `FieldSelectors`, and `SELECTORS`. Define new-offer chains verified against the Task 2.1a fixtures: name (primary `span#productTitle`; Amazon also renders a hidden `input#productTitle`); price (primary `#newAccordionRow_0 #corePrice_feature_div .a-price .a-offscreen` for the accordion layout, fallback `#qualifiedBuybox #corePrice_feature_div .a-price .a-offscreen` for the single-offer layout); availability (primary `#desktop_qualifiedBuyBox #availability .primary-availability-message`); seller (primary `#desktop_qualifiedBuyBox #merchantInfoFeature_feature_div .offer-display-feature-text-message`); and canonical URL (primary `link[rel="canonical"]`, attribute `href`). Legacy `priceblock_*`, `#merchant-info`, `[data-automation]`, and `[data-cy]` selectors are excluded because no fixture matches them or they match the used offer. `externalId` is not a DOM selector: derive it from a documented URL grammar during parser implementation. Each chain entry has a selector string, an allowed attribute (`'textContent'|'href'|'src'|'aria-label'`), and an optional transform function.
+- **verify:** The focused RED test fails because the module does not exist; after implementation, the focused test, `npm test`, typecheck, lint, and build pass. Tests assert the selector keys and exact documented fallback order without accessing Amazon or a browser.
 
 ---
 

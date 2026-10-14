@@ -66,7 +66,7 @@ Exports a `SELECTORS` object keyed by product field. Each field has a fallback c
 ```typescript
 export interface SelectorChain {
   selector: string;
-  attribute?: 'textContent' | 'href' | 'src' | 'aria-label';
+  attribute: 'textContent' | 'href' | 'src' | 'aria-label';
   transform?: (raw: string) => string;
 }
 
@@ -77,16 +77,16 @@ export interface FieldSelectors {
 
 export const SELECTORS: Record<string, FieldSelectors> = {
   name: {
-    primary: { selector: '#productTitle', attribute: 'textContent' },
-    fallbacks: [
-      { selector: '[data-automation="product-title"]', attribute: 'textContent' },
-    ],
+    primary: { selector: 'span#productTitle', attribute: 'textContent' },
   },
   price: {
-    primary: { selector: '.a-price .a-offscreen', attribute: 'textContent' },
+    // Accordion layout (new + used offers), then single-offer layout.
+    primary: {
+      selector: '#newAccordionRow_0 #corePrice_feature_div .a-price .a-offscreen',
+      attribute: 'textContent',
+    },
     fallbacks: [
-      { selector: '#priceblock_ourprice', attribute: 'textContent' },
-      { selector: '#priceblock_dealprice', attribute: 'textContent' },
+      { selector: '#qualifiedBuybox #corePrice_feature_div .a-price .a-offscreen', attribute: 'textContent' },
     ],
   },
   // ...
@@ -288,7 +288,9 @@ async function extractField(page: Page, field: string): Promise<SelectorResult> 
 }
 ```
 
-On complete failure (no selector in chain matches), the crawler returns `CrawlFailure` at extraction stage.
+Selectors SHALL identify the intended value precisely. Offer-level selectors are scoped to the new-offer container so that `.first()` can only pick between duplicates of the same offer, never between the new offer, a used offer, or a strikethrough list price.
+
+On complete failure (no selector in chain matches) for a required field, the crawler returns `CrawlFailure` at extraction stage. An exhausted optional seller chain produces `undefined`.
 
 On partial success, the field is `undefined` in `RawProduct` and the validator catches it.
 
@@ -298,7 +300,7 @@ On partial success, the field is `undefined` in `RawProduct` and the validator c
 
 **Explicit failures, no coercion:**
 
-- Parser returns `RawProduct` with fields as `undefined` when extraction fails — it does not guess
+- Parser returns `RawProduct` with optional fields as `undefined` when extraction fails — it does not guess
 - Validator receives the raw object and returns a `ValidationResult` with all errors collected
 - If validation fails, `AmazonCrawler.crawl()` returns `CrawlFailure { stage: 'validation' }`
 - `CrawlFailure.reason` concatenates all validation error messages
