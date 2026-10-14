@@ -46,11 +46,12 @@ Keep these current and non-duplicative:
 - docs/CHANGELOG.md — notable changes.
 - docs/ADR/ — for significant architectural decisions only, not trivial choices.
 
-## LinkedIn Editorial Workflow
+## Public Repository Hygiene
 
-- `skills/linkedin-qa-content/SKILL.md` governs requests to draft, review, schedule, or catalog LinkedIn content from this project.
-- Tuesday content is a minipill from completed project practice; Thursday content is QA Automation theory selected from a reviewed visual asset. Do not publish planned work as practice. Both require a reviewed image or diagram and human approval before publication.
-- Keep personal PKM notes and media outside this public repository. Do not commit private source material, raw screenshots, secrets, or unpublished post drafts unless intentionally prepared for public release.
+- This repository is public and must stay plug and play for contributors: no personal data, local absolute paths, or personal tooling.
+- Keep personal notes, media, and editorial material outside this repository. Do not commit private source material, raw screenshots, secrets, or unpublished drafts.
+- Real store captures stay in the git-ignored `captures/` directory and are never used as test input; committed tests use synthetic fixtures.
+- Agent memory exports (`.engram/`) are never committed.
 - Update this file when non-negotiable rules or workflow change.
 
 ## Current Context
