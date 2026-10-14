@@ -1,6 +1,6 @@
 # Agent Instructions
 
-Repository-level operating instructions for coding agents (OpenCode, Claude Code, or others) working on PriceWatch QA. This file and CLAUDE.md must stay in parity — same non-negotiable rules, same workflow — each written for its own tool. If you find a discrepancy, treat it as a bug and reconcile both files rather than picking one silently.
+Repository-level operating instructions for coding agents (OpenCode, Claude Code, or others) working on PriceWatch QA. `AGENTS.md` is the single shared source of project instructions.
 
 ## Project Purpose
 
@@ -51,7 +51,7 @@ Keep these current and non-duplicative:
 - `skills/linkedin-qa-content/SKILL.md` governs requests to draft, review, schedule, or catalog LinkedIn content from this project.
 - Tuesday content is a minipill from completed project practice; Thursday content is QA Automation theory selected from a reviewed visual asset. Do not publish planned work as practice. Both require a reviewed image or diagram and human approval before publication.
 - Keep personal PKM notes and media outside this public repository. Do not commit private source material, raw screenshots, secrets, or unpublished post drafts unless intentionally prepared for public release.
-- Changes to this file's non-negotiable rules or workflow must be synchronized in CLAUDE.md in the same change.
+- Update this file when non-negotiable rules or workflow change.
 
 ## Current Context
 

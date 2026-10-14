@@ -5,6 +5,8 @@ dist/
 
 # Local agent tooling
 .atl/
+# Generated local mirror of AGENTS.md (the canonical instructions file)
+/CLAUDE.md
 
 # Playwright
 /test-results/

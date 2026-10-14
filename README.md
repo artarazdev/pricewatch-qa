@@ -92,7 +92,7 @@ Full roadmap: [docs/ROADMAP.md](docs/ROADMAP.md).
 - [docs/PROJECT_STATE.md](docs/PROJECT_STATE.md) — current development state
 - [docs/CHANGELOG.md](docs/CHANGELOG.md) — notable changes
 - [docs/ADR/](docs/ADR/) — architecture decision records
-- [AGENTS.md](AGENTS.md) / [CLAUDE.md](CLAUDE.md) — instructions for coding agents working on this repo
+- [AGENTS.md](AGENTS.md) — shared instructions for coding agents working on this repo
 
 ## AI Assistance
 
