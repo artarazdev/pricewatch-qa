@@ -15,8 +15,6 @@ Bootstrap the repository and establish the modular Store Adapter foundation.
 - Node.js + TypeScript project scaffolding: package.json, tsconfig.json (strict, NodeNext), ESLint 9 flat config (typescript-eslint strict+stylistic, eslint-config-prettier), Prettier, .gitignore/.prettierignore, placeholder src/index.ts.
 - Playwright + Playwright Test installed, Chromium browser binary installed, playwright.config.ts (testDir `tests`, chromium project), `npm test` / `npm run test:e2e` scripts added.
 - Core domain contract (`src/core/`): `Product`, `Currency`, `Availability` (product.ts); `CrawlResult` discriminated union success/failure (crawl-result.ts); `StoreCrawler` interface (store-crawler.ts). No Amazon-specific code.
-- Obsidian PKM for project notes created outside the repository; repo docs remain the formal technical source of truth.
-- Obsidian PKM expanded with installation/bootstrap commands, `package.json` scripts/dependencies rationale, core domain explanation, and current file-by-file reference.
 - `AGENTS.md` is the single shared source of instructions for coding agents.
 - Public-repository hygiene strengthened: generated reports, local tooling state, secrets, certificates, coverage, and editor metadata are ignored; agent instructions and OpenSpec artifacts remain trackable.
 - Core-neutral validation boundary completed: `ProductCandidate`, typed validation/extraction errors, and a pure validator now reject invalid candidates without coercion and return a validated `Product` only on success.
@@ -46,8 +44,8 @@ Bootstrap the repository and establish the modular Store Adapter foundation.
 - Store Adapter architecture chosen so the core domain never depends on Amazon-specific DOM/selectors (see docs/ARCHITECTURE.md and ADR-002).
 - Playwright + TypeScript chosen as the primary automation/testing stack (see ADR-001).
 - SQLite, CI/CD, and a second store adapter are explicitly deferred past V0.1 (see docs/ROADMAP.md).
-- Documentation convention: use `docs/PROJECT_STATE.md` for current technical state, `docs/ARCHITECTURE.md` for architecture source of truth, and Obsidian as a PKM for project notes, explanations, commands, concepts, and session context.
-- Personal editorial tooling (the LinkedIn content skill) lives outside the public repository; `AGENTS.md` now carries public-repository hygiene rules instead.
+- Documentation convention: use `docs/PROJECT_STATE.md` for current technical state and `docs/ARCHITECTURE.md` as the architecture source of truth.
+- Personal tooling and notes live outside the public repository; `AGENTS.md` now carries public-repository hygiene rules instead.
 - The validation boundary uses core `ProductCandidate`, not Amazon `RawProduct`, so `src/core` remains adapter-neutral; the approved correction is recorded in the active OpenSpec design and tasks.
 - `AGENTS.md` is the canonical project instruction file; the duplicated `CLAUDE.md` was removed now that Claude Code supports `AGENTS.md` directly.
 - The Amazon adapter monitors only the new offer; used and other offers are never extracted. Seller is the merchant, not the fulfiller.
@@ -58,11 +56,8 @@ Bootstrap the repository and establish the modular Store Adapter foundation.
 ## Last Validation
 
 - 2026-08-10: `npm run typecheck`, `npm run lint`, `npm run format:check`, `npm run build` all pass clean with Playwright config + core domain contract added. `npx playwright --version` confirms 1.62.1 installed; `npx playwright test` correctly reports "No tests found" (no specs added yet, expected).
-- 2026-08-10: Obsidian PKM structure added/reworked; no code changed, so no build/test command was required for this documentation-only update.
-- 2026-08-10: Obsidian PKM expanded with stack, commands, installation, core contract, and file reference notes; only Markdown documentation changed, so no build/test command was required.
-- 2026-08-31: `npm run typecheck`, `npm run lint`, and `npm run build` pass after the editorial workflow and public-repository hygiene changes. The updated skill and repository Markdown files pass targeted Prettier verification. Full `npm run format:check` remains blocked only by four pre-existing OpenSpec formatting warnings.
-- 2026-08-31: LinkedIn cadence refined in the skill, agent instructions, and Obsidian workflow. Only documentation changed; targeted Prettier verification passed.
-- 2026-08-31: Editorial policy and Obsidian notes reduced to the minimum operational set. `qa-automation-copilot` is the default skill for QA Automation work; targeted Prettier verification passed.
+- 2026-08-31: `npm run typecheck`, `npm run lint`, and `npm run build` pass after the public-repository hygiene changes. Repository Markdown files pass targeted Prettier verification. Full `npm run format:check` remains blocked only by four pre-existing OpenSpec formatting warnings.
+- 2026-08-31: `qa-automation-copilot` established as the default skill for QA Automation work; targeted Prettier verification passed.
 - 2026-09-01: Validator TDD work unit completed. RED: `npx playwright test tests/unit/validator.test.ts` failed because `src/core/domain/validator.js` did not exist. Final validation after review: 8 validator tests and `npm test` pass; `npm run typecheck`, `npm run lint`, targeted Prettier, and `npm run build` pass.
 - 2026-10-13: Consolidated coding-agent instructions into `AGENTS.md`; documentation-only change, so no test command was required.
 - 2026-10-13: Declared Node types explicitly in `tsconfig.json`; `npm run typecheck`, `npm run lint`, and targeted Prettier verification pass.
